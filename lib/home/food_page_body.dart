@@ -1,11 +1,11 @@
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/constants/constant.dart';
-import 'package:food_delivery_app/utils/app_colors.dart';
-import 'package:food_delivery_app/utils/dimension.dart';
-import 'package:food_delivery_app/widgets/big_text.dart';
-import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
-import 'package:food_delivery_app/widgets/small_text.dart';
+import '/utils/app_colors.dart';
+import '/utils/dimension.dart';
+import '/utils/show_icon_and_text_row.dart';
+import '/widgets/big_text.dart';
+import '/widgets/small_text.dart';
 
 class FoodPageBody extends StatefulWidget {
   FoodPageBody({Key? key}) : super(key: key);
@@ -64,6 +64,115 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
+          ),
+        ),
+
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+
+        //Popular text
+        Container(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: 'Popular'),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: 3,
+                ),
+                child: BigText(
+                  text: '.',
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: 3,
+                ),
+                child: SmallText(
+                  text: 'Food pairing',
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        //List of food and images
+        Container(
+          margin: EdgeInsets.only(
+            top: Dimensions.height20,
+          ),
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            // primary: false,
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(
+                  bottom: Dimensions.height10,
+                ),
+                child: Row(
+                  children: [
+                    //image container
+                    Container(
+                      height: Dimensions.listViewImageHeight,
+                      width: Dimensions.listViewImageWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white38,
+                        borderRadius: BorderRadius.circular(
+                          Dimensions.height20,
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/burger.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+
+                    //text container
+                    Expanded(
+                      child: Container(
+                        height: Dimensions.listViewTextContainerHeight,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(Dimensions.radius20),
+                            bottomRight: Radius.circular(Dimensions.radius20),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: Dimensions.width10,
+                            right: Dimensions.width10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(text: 'Nutritious food meal in Germany'),
+                              SizedBox(height: Dimensions.height10,),
+                              SmallText(text: 'With German Characteristics'),
+                              SizedBox(height: Dimensions.height10,),
+                              ShowIconAndTextRow().showIconAndTextRow(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ],
@@ -191,26 +300,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndTextWidget(
-                          icon: Icons.circle_sharp,
-                          text: 'Normal',
-                          iconColor: AppColors.iconColor1,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on_outlined,
-                          text: '1.5km',
-                          iconColor: AppColors.mainColor,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          text: '23min',
-                          iconColor: AppColors.iconColor2,
-                        ),
-                      ],
-                    ),
+                    ShowIconAndTextRow().showIconAndTextRow(),
                   ],
                 ),
               ),

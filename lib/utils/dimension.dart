@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class Dimensions{
+  //height : 825
+  //width : 392
   
   static double screenHeight = Get.context!.height;
   static double screenWidth = Get.context!.width;
@@ -39,5 +41,11 @@ class Dimensions{
 
   //dynamic icon size
   static double iconSize24 = screenHeight/34.375;
+
+  //dynamic size of image container and text container used in ListView
+  static double listViewImageHeight = screenHeight/6.875;
+  static double listViewImageWidth = screenWidth/3.267;
+
+  static double listViewTextContainerHeight = screenHeight/8.25;
   
 }
