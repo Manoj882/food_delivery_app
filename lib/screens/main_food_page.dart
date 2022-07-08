@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/constants/constant.dart';
+import 'package:food_delivery_app/screens/food_page_body.dart';
 import 'package:food_delivery_app/utils/app_colors.dart';
+import 'package:food_delivery_app/widgets/big_text.dart';
+import 'package:food_delivery_app/widgets/small_text.dart';
 
 class MainFoodPageScreen extends StatelessWidget {
   const MainFoodPageScreen({Key? key}) : super(key: key);
@@ -14,15 +17,29 @@ class MainFoodPageScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
+              
                 child: Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Nepal'),
-                          Text('Kathmandu'),
+                          BigText(
+                            text: 'Nepal',
+                            color: AppColors.mainColor,
+                          ),
+                          Row(
+                            children: [
+                              SmallText(
+                                text: 'kathmandu',
+                                color: Colors.black54,
+                              ),
+                              Icon(Icons.arrow_drop_down_outlined,),
+                            ],
+                          ),
                         ],
                       ),
                       Container(
@@ -44,6 +61,7 @@ class MainFoodPageScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              FoodPageBody(),
             ],
           ),
         ),
