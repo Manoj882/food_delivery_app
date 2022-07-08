@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:food_delivery_app/utils/dimension.dart';
 
-const basePadding = EdgeInsets.symmetric(
-  vertical: 8.0,
-  horizontal: 16.0,
+final basePadding = EdgeInsets.symmetric(
+  vertical: Dimensions.verticalSize,
+  horizontal: Dimensions.horizontalSize,
 );
+   
