@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '/constants/constant.dart';
-import '/home/food_page_body.dart';
+
 import '/utils/app_colors.dart';
 import '/utils/dimension.dart';
 import '/widgets/big_text.dart';
 import '/widgets/small_text.dart';
+import 'food_page_body.dart';
 
 class MainFoodPageScreen extends StatelessWidget {
   const MainFoodPageScreen({Key? key}) : super(key: key);

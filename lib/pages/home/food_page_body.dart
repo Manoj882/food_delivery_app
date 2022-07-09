@@ -1,9 +1,11 @@
 
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/utils/app_column.dart';
+import 'package:food_delivery_app/utils/show_icon_and_text_row.dart';
 import '/utils/app_colors.dart';
 import '/utils/dimension.dart';
-import '/utils/show_icon_and_text_row.dart';
+
 import '/widgets/big_text.dart';
 import '/widgets/small_text.dart';
 
@@ -264,45 +266,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     right: Dimensions.height15,
                     left: Dimensions.width15),
                 width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: 'Veggie Burgers'),
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                            5,
-                            (index) => Icon(
-                              Icons.star_outlined,
-                              color: AppColors.mainColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: '4.5'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: '1270'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: 'comments'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                    ShowIconAndTextRow().showIconAndTextRow(),
-                  ],
-                ),
+                child: AppColumn(text: 'Veggie Burger',),
               ),
             ),
           ),
