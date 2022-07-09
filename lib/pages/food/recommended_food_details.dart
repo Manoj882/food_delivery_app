@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controllers/recommendec_product_controller.dart';
+import 'package:food_delivery_app/routes/routes_helper.dart';
 import 'package:food_delivery_app/utils/app_colors.dart';
 import 'package:food_delivery_app/utils/dimension.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
+import 'package:food_delivery_app/widgets/small_text.dart';
+import 'package:get/get.dart';
+
+import '../../constants/app_constants.dart';
 
 class RecommendedFoodDetailsPage extends StatelessWidget {
-  const RecommendedFoodDetailsPage({Key? key}) : super(key: key);
+  const RecommendedFoodDetailsPage({required this.pageId, Key? key}) : super(key: key);
+
+  final int pageId;
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
-                  icon: Icons.clear_outlined,
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(
+                    icon: Icons.clear_outlined,
+                  ),
                 ),
                 AppIcon(
                   icon: Icons.shopping_cart_outlined,
@@ -47,15 +63,15 @@ class RecommendedFoodDetailsPage extends StatelessWidget {
                 ),
                 child: Center(
                   child: BigText(
-                    text: 'Sliver App Bar',
+                    text: product.name,
                     size: Dimensions.fontSize26,
                   ),
                 ),
               ),
             ),
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/images/burger.jpg',
+              background: Image.network(
+                '${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${product.img}',
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -70,8 +86,9 @@ class RecommendedFoodDetailsPage extends StatelessWidget {
                     right: Dimensions.width20,
                   ),
                   child: ExpandableTextWidget(
-                      text:
-                          'The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.The origin of hamburger is unknown, but the hamburger patty and sandwich were probably brought by 19th-century German immigrants to the United States, where in a matter of decades the hamburger came to be considered an archetypal American food. The importance of the hamburger in American popular culture is indicated by its virtual ubiquity at backyard barbecues and on fast-food restaurant menus and by the proliferation of so-called hamburger stands and restaurants. Some chains, such as McDonald’s, Burger King, and Wendy’s, proliferated worldwide.'),
+                      text: product.description,
+                  ),
+                          
                 ),
               ],
             ),
@@ -96,7 +113,7 @@ class RecommendedFoodDetailsPage extends StatelessWidget {
                   iconSize: Dimensions.iconSize24,
                 ),
                 BigText(
-                  text: '\$10.75  X  0',
+                  text: '\$${product.price}  X  0',
                   color: AppColors.mainBlackColor,
                   size: Dimensions.fontSize26,
                 ),
@@ -147,7 +164,7 @@ class RecommendedFoodDetailsPage extends StatelessWidget {
                     ),
                   ),
                   child: BigText(
-                    text: '\$2.50 | Add to Cart',
+                    text: '\$${product.price} | Add to Cart',
                     color: Colors.white,
                   ),
                 ),

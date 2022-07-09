@@ -4,6 +4,8 @@ import 'package:food_delivery_app/constants/app_constants.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:food_delivery_app/controllers/recommendec_product_controller.dart';
 import 'package:food_delivery_app/models/product_model.dart';
+import 'package:food_delivery_app/pages/food/popular_food_details.dart';
+import 'package:food_delivery_app/routes/routes_helper.dart';
 import 'package:food_delivery_app/utils/app_column.dart';
 import 'package:food_delivery_app/utils/show_icon_and_text_row.dart';
 import 'package:get/get.dart';
@@ -47,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //slider section
+        //slider for popular food section
         GetBuilder<PopularProductController>(builder: (popularProducts) {
           return popularProducts.isLoaded ? Container(
             height: Dimensions.pageView,
@@ -177,20 +179,25 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(
-              left: Dimensions.width10,
-              right: Dimensions.width10,
-            ),
-            decoration: BoxDecoration(
-              color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              borderRadius: BorderRadius.circular(Dimensions.radius30),
-              image: DecorationImage(
-                image: NetworkImage(
-                  '${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${popularProduct.img!}',
+          GestureDetector(
+            onTap: (){
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(
+                left: Dimensions.width10,
+                right: Dimensions.width10,
+              ),
+              decoration: BoxDecoration(
+                color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    '${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${popularProduct.img!}',
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -240,68 +247,73 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   }
 
   Widget _buildRecommendedListViewItem(int index, ProductModel recommendedProduct){
-    return Container(
-        margin: EdgeInsets.only(
-          bottom: Dimensions.height10,
-        ),
-        child: Row(
-          children: [
-            //image container
-            Container(
-              height: Dimensions.listViewImageHeight,
-              width: Dimensions.listViewImageWidth,
-              decoration: BoxDecoration(                            
-                color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
-                borderRadius: BorderRadius.circular(
-                  Dimensions.height20,
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    '${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${recommendedProduct.img!}',
+    return GestureDetector(
+      onTap: (){
+        Get.toNamed(RouteHelper.getRecommendedFood(index));
+      },
+      child: Container(
+          margin: EdgeInsets.only(
+            bottom: Dimensions.height10,
+          ),
+          child: Row(
+            children: [
+              //image container
+              Container(
+                height: Dimensions.listViewImageHeight,
+                width: Dimensions.listViewImageWidth,
+                decoration: BoxDecoration(                            
+                  color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
+                  borderRadius: BorderRadius.circular(
+                    Dimensions.height20,
+                  ),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      '${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${recommendedProduct.img!}',
+                      
+                    ),
                     
-                  ),
-                  
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-
-            //text container
-            Expanded(
-              child: Container(
-                height: Dimensions.listViewTextContainerHeight,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(Dimensions.radius20),
-                    bottomRight: Radius.circular(Dimensions.radius20),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: Dimensions.width10,
-                    right: Dimensions.width10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BigText(text: recommendedProduct.name!),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      SmallText(text: 'With German Characteristics'),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      ShowIconAndTextRow().showIconAndTextRow(),
-                    ],
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-            ),
-          ],
+    
+              //text container
+              Expanded(
+                child: Container(
+                  height: Dimensions.listViewTextContainerHeight,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(Dimensions.radius20),
+                      bottomRight: Radius.circular(Dimensions.radius20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: Dimensions.width10,
+                      right: Dimensions.width10,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BigText(text: recommendedProduct.name!),
+                        SizedBox(
+                          height: Dimensions.height10,
+                        ),
+                        SmallText(text: 'With German Characteristics'),
+                        SizedBox(
+                          height: Dimensions.height10,
+                        ),
+                        ShowIconAndTextRow().showIconAndTextRow(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      );
+    );
   }
 }
