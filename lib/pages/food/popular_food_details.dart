@@ -24,10 +24,9 @@ class PopularFoodDetailsPage extends StatelessWidget {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
     // print('Page id is ${pageId.toString()}');
-   
 
-    Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
-    
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,9 +66,40 @@ class PopularFoodDetailsPage extends StatelessWidget {
                     icon: Icons.arrow_back_ios_outlined,
                   ),
                 ),
-                AppIcon(
-                  icon: Icons.shopping_cart_outlined,
-                ),
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return Stack(
+                    children: [
+                      AppIcon(
+                        icon: Icons.shopping_cart_outlined,
+                      ),
+                      Get.find<PopularProductController>().totalItems >= 1
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: AppIcon(
+                                icon: Icons.circle_outlined,
+                                size: 20,
+                                iconColor: Colors.transparent,
+                                backgroundColor: AppColors.mainColor,
+                              ),
+                            )
+                          : Container(),
+                      Get.find<PopularProductController>().totalItems >= 1
+                          ? Positioned(
+                              right: 6,
+                              top: 3,
+                              child: BigText(
+                                text: Get.find<PopularProductController>()
+                                    .totalItems
+                                    .toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  );
+                }),
               ],
             ),
           ),
@@ -165,7 +195,7 @@ class PopularFoodDetailsPage extends StatelessWidget {
                     ),
                     //
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         popularProduct.setQuantity(true);
                       },
                       child: Icon(
@@ -185,7 +215,7 @@ class PopularFoodDetailsPage extends StatelessWidget {
                   ),
                 ),
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     popularProduct.addItem(product);
                   },
                   child: BigText(

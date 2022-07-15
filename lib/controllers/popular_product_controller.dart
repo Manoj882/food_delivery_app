@@ -112,6 +112,11 @@ class PopularProductController extends GetxController {
     //   );
 
     // }
+    update();
 
+  }
+
+  int get totalItems{
+    return _cart.totalItems;
   }
 }
