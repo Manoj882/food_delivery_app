@@ -4,6 +4,7 @@ import 'package:food_delivery_app/data/repository/popular_product_repo.dart';
 import 'package:food_delivery_app/utils/app_colors.dart';
 import 'package:get/get.dart';
 
+import '../models/cart_model.dart';
 import '../models/product_model.dart';
 
 class PopularProductController extends GetxController {
@@ -23,7 +24,9 @@ class PopularProductController extends GetxController {
   int get quantity => _quantity;
 
   int _inCartItems = 0;
-  int get inCarItems => _inCartItems + _quantity;
+  int get inCartItems => _inCartItems + _quantity;
+
+  
 
 
   Future<void> getPopularProductList() async {
@@ -43,6 +46,7 @@ class PopularProductController extends GetxController {
     if (isIncrement) {
       // print('increment');
       _quantity = checkQuantity(_quantity + 1);
+      print('number of items ${_quantity.toString()}');
     } else {
       _quantity = checkQuantity(_quantity - 1);
       print('decrement ${_quantity.toString()}');
@@ -58,6 +62,10 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if(_inCartItems > 0){
+        _quantity = - _inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
@@ -97,26 +105,24 @@ class PopularProductController extends GetxController {
   }
 
   void addItem(ProductModel product){
-    // if(_quantity > 0){
+    
     _cart.addItem(product, _quantity);
+   
     _quantity = 0;
+    _inCartItems = _cart.getQuantity(product);
     _cart.items.forEach((key, value) { 
       print('The id is ${value.id.toString()} The quantiy is ${value.quantity.toString()}');
     });
-    // } else{
-    //   Get.snackbar(
-    //     'Item count',
-    //     'You should add at least an item in the cart',
-    //     backgroundColor: AppColors.mainColor,
-    //     colorText: Colors.white,
-    //   );
-
-    // }
+    
     update();
 
   }
 
   int get totalItems{
     return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 }
