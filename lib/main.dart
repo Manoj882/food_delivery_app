@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       
-      initialRoute: RouteHelper.initial,
+      initialRoute: RouteHelper.getInitial(),
       getPages: RouteHelper.routes,
 
 
 
       //home: CartPage(),
-      home: MainFoodPageScreen(),
+      // home: MainFoodPageScreen(),
       // home: const PopularFoodDetailsPage(),
       // home: const RecommendedFoodDetailsPage(),
     );
