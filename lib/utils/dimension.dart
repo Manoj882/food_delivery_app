@@ -61,5 +61,10 @@ class Dimensions{
 
   //dynamix hieght for buttom navigation bar container
   static double bottomNavBarHeight = screenHeight/6.875;
+
+  //splash screen dimension
+  static double splashImg = screenHeight/3.3;
+  
+
   
 }
