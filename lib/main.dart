@@ -4,6 +4,7 @@ import 'package:food_delivery_app/controllers/recommendec_product_controller.dar
 import 'package:food_delivery_app/pages/carts/cart_page.dart';
 import 'package:food_delivery_app/pages/food/popular_food_details.dart';
 import 'package:food_delivery_app/pages/food/recommended_food_details.dart';
+import 'package:food_delivery_app/pages/splash/splash_page.dart';
 import 'package:food_delivery_app/routes/routes_helper.dart';
 import 'package:get/get.dart';
 
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
 
-      
-      initialRoute: RouteHelper.getInitial(),
+      // home: SplashScreen(),
+      initialRoute: RouteHelper.getSplashPage(),
       getPages: RouteHelper.routes,
 
 
