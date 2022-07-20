@@ -18,12 +18,15 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> animation;
   late AnimationController controller;
 
- 
+  Future<void>_loadResource()async{
+    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  }
 
   @override
   void initState() {
     super.initState();
-   
+    _loadResource();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
