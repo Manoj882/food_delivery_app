@@ -11,4 +11,6 @@ class AppConstants{
   static const String UPLOAD_URL = '/uploads/';
 
   static const String CART_LIST = 'cart-List';
+  static const String CART_HISTORY_LIST = 'cart-history-List';
+  
 }

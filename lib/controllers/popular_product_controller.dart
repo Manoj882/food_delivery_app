@@ -33,7 +33,7 @@ class PopularProductController extends GetxController {
     Response response = await popularProductRepo.getPopularProductList();
 
     if (response.statusCode == 200) {
-      print('got products');
+      // print('got products');
       _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).products);
 
@@ -46,10 +46,10 @@ class PopularProductController extends GetxController {
     if (isIncrement) {
       // print('increment');
       _quantity = checkQuantity(_quantity + 1);
-      print('number of items ${_quantity.toString()}');
+      // print('number of items ${_quantity.toString()}');
     } else {
       _quantity = checkQuantity(_quantity - 1);
-      print('decrement ${_quantity.toString()}');
+      // print('decrement ${_quantity.toString()}');
     }
     update();
   }
@@ -98,7 +98,7 @@ class PopularProductController extends GetxController {
     if(exist){
       _inCartItems = cart.getQuantity(product);
     }
-    print('The quantity in the cart is ${_inCartItems.toString()}');
+    // print('The quantity in the cart is ${_inCartItems.toString()}');
 
 
 
@@ -111,7 +111,7 @@ class PopularProductController extends GetxController {
     _quantity = 0;
     _inCartItems = _cart.getQuantity(product);
     _cart.items.forEach((key, value) { 
-      print('The id is ${value.id.toString()} The quantiy is ${value.quantity.toString()}');
+      // print('The id is ${value.id.toString()} The quantiy is ${value.quantity.toString()}');
     });
     
     update();
