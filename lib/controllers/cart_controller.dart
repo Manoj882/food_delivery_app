@@ -147,6 +147,7 @@ class CartController extends GetxController{
     return storageItems;
 
   }
+  
   set setCart(List<CartModel> items){
    
     storageItems = items;
@@ -167,5 +168,9 @@ class CartController extends GetxController{
     _items = {};
     update();
 
+  }
+
+  List<CartModel> getCartHistoryList(){
+    return cartRepo.getCartHistoryList();
   }
 }
