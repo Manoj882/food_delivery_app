@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/constants/app_constants.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
+import 'package:food_delivery_app/models/cart_model.dart';
+import 'package:food_delivery_app/routes/routes_helper.dart';
 import 'package:food_delivery_app/utils/app_colors.dart';
 import 'package:food_delivery_app/utils/dimension.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
@@ -26,11 +30,17 @@ class CartHistory extends StatelessWidget {
       }
     }
 
-    List<int> cartOrderTimeToList() {
+    List<int> cartItemsPerOrderToList() {
       return cartItemsPerOrder.entries.map((e) => e.value).toList();
     }
 
-    List<int> itemsPerOrder = cartOrderTimeToList();
+    List<String> cartOrderTimeToList() {
+      return cartItemsPerOrder.entries.map((e) => e.key).toList();
+    }
+
+    
+
+    List<int> itemsPerOrder = cartItemsPerOrderToList();
     var listCounter = 0;
 
     return Scaffold(
@@ -142,7 +152,27 @@ class CartHistory extends StatelessWidget {
                                         color: AppColors.titleColor,
                                       ),
                                       GestureDetector(
-                                        onTap: (){},
+                                        onTap: (){
+                                          var orderTime = cartOrderTimeToList();
+                                          // print('Order time ${orderTime[i].toString()}');
+                                          Map<int, CartModel> moreOrder ={};
+                                          for(int j =0; j<getCartHistoryList.length; j++){
+                                            if(getCartHistoryList[j].time == orderTime[i]){
+                                            //  print('The cart or product id is ${getCartHistoryList[j].product!.id.toString()}');
+                                            //  print('Product info is ${jsonEncode(getCartHistoryList[j])}');
+                                            moreOrder.putIfAbsent(getCartHistoryList[j].id!, () => 
+                                             CartModel.fromJson(jsonDecode(jsonEncode(getCartHistoryList[j]))),
+                                            );
+                                            }
+                                          }
+
+                                          Get.find<CartController>().setItems = moreOrder;
+                                          Get.find<CartController>().addToCartList();
+                                          Get.toNamed(RouteHelper.getCartPage());
+
+
+
+                                        },
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
                                             horizontal: Dimensions.width10,
