@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controllers/popular_product_controller.dart';
+import 'package:food_delivery_app/controllers/recommendec_product_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '/constants/constant.dart';
 
 import '/utils/app_colors.dart';
@@ -7,14 +11,25 @@ import '/widgets/big_text.dart';
 import '/widgets/small_text.dart';
 import 'food_page_body.dart';
 
-class MainFoodPageScreen extends StatelessWidget {
+class MainFoodPageScreen extends StatefulWidget {
   const MainFoodPageScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MainFoodPageScreen> createState() => _MainFoodPageScreenState();
+}
+
+class _MainFoodPageScreenState extends State<MainFoodPageScreen> {
+  Future<void>_loadResource()async{
+    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  }
 
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      body: SafeArea(
+    return RefreshIndicator(
+      onRefresh: _loadResource,
+      child: SafeArea(
         child: Padding(
           padding: basePadding,
           child: Column(
