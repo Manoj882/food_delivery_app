@@ -4,10 +4,11 @@ import 'package:food_delivery_app/utils/app_colors.dart';
 import 'package:food_delivery_app/utils/dimension.dart';
 
 class AppTextField extends StatelessWidget {
-  const AppTextField({
+   AppTextField({
     required this.textController,
     required this.hintText,
     required this.icon,
+    this.isObscure = false,
 
     Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class AppTextField extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
   final IconData icon;
+  bool isObscure;
   
 
   @override
@@ -26,18 +28,19 @@ class AppTextField extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 10,
-                    spreadRadius: 7,
-                    offset: Offset(1, 10),
+                    blurRadius: 3,
+                    spreadRadius: 1,
+                    offset: Offset(1, 1),
                     color: Colors.grey.withOpacity(0.2),
                   ),
                 ],
               ),
               child: TextField(
                 controller: textController,
+                obscureText: isObscure?true:false,
                 decoration: InputDecoration(
                   hintText: hintText,
                   prefixIcon: Icon(
@@ -46,7 +49,7 @@ class AppTextField extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
-                      Dimensions.radius30,
+                      Dimensions.radius15,
                     ),
                     borderSide: BorderSide(
                       width: 1.0,
@@ -55,7 +58,7 @@ class AppTextField extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
-                      Dimensions.radius30,
+                      Dimensions.radius15,
                     ),
                     borderSide: BorderSide(
                       width: 1.0,
@@ -64,7 +67,7 @@ class AppTextField extends StatelessWidget {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
-                      Dimensions.radius30,
+                      Dimensions.radius15,
                     ),
                   ),
                 ),

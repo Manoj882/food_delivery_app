@@ -41,7 +41,7 @@ class ApiClient extends GetConnect implements GetxService {
     print(body.toString());
     try{
       Response response = await post(uri, body, headers: _mainHeaders);
-      print(response.body);
+      // print(response.body);
       return response;
 
       

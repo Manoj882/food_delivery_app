@@ -18,7 +18,7 @@ class AppConstants{
   static const String UPLOAD_URL = '/uploads/';
 
   //auth end points
-  static const String REGISTRATION_URI ='api/v1/auth/register';
+  static const String REGISTRATION_URI ='/api/v1/auth/register';
 
   static const String CART_LIST = 'cart-List';
   static const String CART_HISTORY_LIST = 'cart-history-List';
