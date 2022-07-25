@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/pages/account/account_page.dart';
+import 'package:food_delivery_app/pages/auth/sign_in_page.dart';
 import 'package:food_delivery_app/pages/auth/sign_up_page.dart';
 import 'package:food_delivery_app/pages/carts/cart_history.dart';
 import '/pages/home/main_food_page.dart';
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     MainFoodPageScreen(),
-    SignUpPage(),
+    SignInPage(),
     CartHistory(),
     AccountPage(),
    

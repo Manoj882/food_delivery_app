@@ -41,7 +41,7 @@ class SignUpPage extends StatelessWidget {
       } else if (!GetUtils.isEmail(email)) {
         showCustomSnackBar('Enter your valid email address',
             title: 'Valid email address');
-      } else if (password.isEmail) {
+      } else if (password.isEmpty) {
         showCustomSnackBar('Enter your password', title: 'password');
       } else if (password.length < 6) {
         showCustomSnackBar('Password can not be less than six characters',

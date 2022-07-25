@@ -38,11 +38,11 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
 
-              home: SignInPage(),
+              // home: SignInPage(),
 
               // home: SplashScreen(),
-              // initialRoute: RouteHelper.getSplashPage(),
-              // getPages: RouteHelper.routes,
+              initialRoute: RouteHelper.getSplashPage(),
+              getPages: RouteHelper.routes,
 
 
 
