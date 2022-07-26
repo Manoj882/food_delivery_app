@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     MainFoodPageScreen(),
-    SignInPage(),
+    Container(child: Text('History Page'),),
     CartHistory(),
     AccountPage(),
    
